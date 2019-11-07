@@ -1,0 +1,24 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/template/Template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="pageTitle">Add doctor</ui:define>
+	    <ui:define name="pageTop"> 
+	    <h1>Afficher liste des sujets</h1>
+	    </ui:define>
+	<ui:define name="pageSide">
+	<p:tooltip />
+
+</ui:define>
+    <ui:define name="pageContent"> 
+    <h:graphicImage value="/resources/images/1.PNG" />
+    <p:button outcome="productDetail" value="With Icon" icon="ui-icon-star">
+    <f:param name="productId" value="20" />
+</p:button>
+ 
+
+    </ui:define>
+</ui:composition>

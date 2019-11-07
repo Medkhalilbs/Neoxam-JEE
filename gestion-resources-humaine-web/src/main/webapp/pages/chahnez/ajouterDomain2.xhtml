@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head> 
+<body> 
+
+ 
+<h:form>
+    <p:messages id="messages" showDetail="true" closable="true">
+        <p:autoUpdate />
+    </p:messages>
+ 
+    <p:commandButton value="Info" actionListener="#{messagesView.info}" />
+    <p:commandButton value="Error" actionListener="#{messagesView.error}" />
+</h:form>
+ 
+<p:separator />
+ <h1 >Ajouter theme</h1>
+ 
+<h:form  id="form">
+    <h:panelGrid id="grid" columns="3" cellpadding="5">
+        <p:outputLabel for="default" value="Nom du theme" />
+        <p:inputText id="default" required="true" value="#{domainBean.name}"/>
+        <p:message for="default" />
+     
+<!--     <p:outputLabel for="console" value="Basic:" /> -->
+        <p:selectOneMenu value="#{domainBean.console}" style="width:185px">
+            <f:selectItem itemLabel="Selectioner type" itemValue="" />
+            <f:selectItem itemLabel="Technique" itemValue="Technique" />
+            <f:selectItem itemLabel="Langue" itemValue="Langue" />
+        </p:selectOneMenu>
+        
+     
+     
+     
+    </h:panelGrid>
+  
+    <p:commandButton id="bnt" action="#{domainBean.doAdd()}" value="Ajouter theme" update="grid" />
+  
+</h:form>
+
+
+</body> 
+</html>

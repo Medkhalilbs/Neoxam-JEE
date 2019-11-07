@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://java.sun.com/jsf/html"> 
+
+<h:head>
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title> Gestion des projets</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="../../resources/css/style.css" rel="stylesheet" />
+	
+	<style>
+	
+	
+	
+	thead
+	{background-color: #009999;
+	
+	
+	}</style>
+
+</h:head> 
+<body> 
+<ui:include src="/pages/template/header.xhtml" />
+
+<section id="main">
+      <div class="container">
+        <div class="row">
+          
+          <div class="col-md-12">
+          
+          <div class="alert alert-info">
+          
+          	Formulaire Ajoute Projet
+          
+          </div>
+            <!-- Website Overview -->
+            <div class="panel panel-default">
+              
+              <div class="panel-body">
+              
+              
+<ui:insert name="main"> 
+
+<h:inputHidden value="#{projetBean.statistic}" id="json"></h:inputHidden>
+<div id="chart">
+
+</div>
+
+</ui:insert>
+
+
+              </div>
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+     <script src="../../resources/js/bootstrap.min.js"></script>
+     <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script type="text/javascript">
+
+var val=$('#json').val();
+var js=JSON.parse(val);
+
+Highcharts.chart('chart', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: 0,
+        plotShadow: false
+    },
+    title: {
+        text: 'Statistique status projet',
+        align: 'center',
+        verticalAlign: 'middle',
+        y: 40
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            dataLabels: {
+                enabled: true,
+                distance: -50,
+                style: {
+                    fontWeight: 'bold',
+                    color: 'white'
+                }
+            },
+            startAngle: -90,
+            endAngle: 90,
+            center: ['50%', '75%'],
+            size: '110%'
+        }
+    },
+    series: [{
+        type: 'pie',
+        name: 'Browser share',
+        innerSize: '50%',
+        data:js
+    }]
+});
+
+</script>
+</body> 
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"> 
+
+<h:head>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title> Gestion des ressources humaines</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="../../resources/css/style.css" rel="stylesheet" />
+
+
+
+
+</h:head> 
+<body> 
+
+
+<ui:include src="/pages/template/header.xhtml" />
+
+
+
+
+<section id="main">
+      <div class="container">
+        <div class="row">
+          
+          <div class="col-md-12">
+            <!-- Website Overview -->
+            <div class="panel panel-default">
+              
+              <div class="panel-body">
+              
+              
+<ui:insert name="main"> 
+<body>  
+<div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-4">
+        <div class="ui-inputgroup">
+           <p:commandButton action="#{employeeBean.addview()}" value="Ajouter Employee"/> 
+            
+            <p:commandButton action="#{employeeBean.listview()}" value="EmployeeSTATUS list"/>       
+        </div>
+    </div>
+</div>
+
+<h:form id="employesTableForm">
+  
+<p:dataTable value="#{employeeBean.employes}" var="employee" border="1">
+
+<p:column headerText="Cin" filterBy="#{employee.cin}"  filterMatchMode="contains">
+			<p:cellEditor>
+				<f:facet name="output">
+					<h:outputText value="#{employee.cin}" />
+				</f:facet>
+				<f:facet name="input">
+					<p:inputText id="modelInputId" value="#{employee.cin}" style="width:100%" />
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+
+
+
+
+
+		<p:column headerText="Position" filterBy="#{employee.position_held}"  filterMatchMode="contains">
+			<p:cellEditor>
+				<f:facet name="output">
+					<h:outputText value="#{employee.position_held}" />
+				</f:facet>
+				<f:facet name="input">
+					<p:inputText id="modelInputId2" value="#{employee.position_held}" style="width:100%" />
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+		
+		<p:column headerText="Recrutment Date" filterBy="#{employee.recrutment_date}"  filterMatchMode="contains">
+			<p:cellEditor>
+				<f:facet name="output">
+					<h:outputText value="#{employee.recrutment_date}" />
+				</f:facet>
+				<f:facet name="input">
+					<p:inputText id="modelInputId3" value="#{employee.recrutment_date}" style="width:100%" />
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+		
+		<p:column headerText="Childrens Nbr" filterBy="#{employee.childrens_nbr}"  filterMatchMode="contains">
+			<p:cellEditor>
+				<f:facet name="output">
+					<h:outputText value="#{employee.childrens_nbr}" />
+				</f:facet>
+				<f:facet name="input">
+					<p:inputText id="modelInputId4" value="#{employee.childrens_nbr}" style="width:100%" />
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+		
+		
+		<p:column headerText="Salary" filterBy="#{employee.salary}"  filterMatchMode="contains">
+			<p:cellEditor>
+				<f:facet name="output">
+					<h:outputText value="#{employee.salary}" />
+				</f:facet>
+				<f:facet name="input">
+					<p:inputText id="modelInputId5" value="#{employee.salary}" style="width:100%" />
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+		
+		
+		
+		<p:column headerText="Bonus Pts" filterBy="#{employee.bonus_pts}"  filterMatchMode="contains">
+			<p:cellEditor>
+				<f:facet name="output">
+					<h:outputText value="#{employee.bonus_pts}" />
+				</f:facet>
+				<f:facet name="input">
+					<p:inputText id="modelInputId6" value="#{employee.bonus_pts}" style="width:100%" />
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+		
+		
+		
+		<p:column headerText="Nbr_holidays" filterBy="#{employee.nbr_holidays}"  filterMatchMode="contains">
+			<p:cellEditor>
+				<f:facet name="output">
+					<h:outputText value="#{employee.nbr_holidays}" />
+				</f:facet>
+				<f:facet name="input">
+					<p:inputText id="modelInputId7" value="#{employee.nbr_holidays}" style="width:100%" />
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+		
+		<p:column headerText="Nbr_late" filterBy="#{employee.nbr_late}"  filterMatchMode="contains">
+			<p:cellEditor>
+				<f:facet name="output">
+					<h:outputText value="#{employee.nbr_late}" />
+				</f:facet>
+				<f:facet name="input">
+					<p:inputText id="modelInputId8" value="#{employee.nbr_late}" style="width:100%" />
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+		
+		<p:column headerText="Mail" filterBy="#{employee.mail}"  filterMatchMode="contains">
+			<p:cellEditor>
+				<f:facet name="output">
+					<h:outputText value="#{employee.mail}" />
+				</f:facet>
+				<f:facet name="input">
+					<p:inputText id="modelInputId9" value="#{employee.mail}" style="width:100%" />
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+<p:column>
+<f:facet name="header">
+<h:outputText value="Action" />
+</f:facet>
+
+<h:commandButton action="#{employeeBean.deleteemployeeandstatus(employee.cin)}" value="Delete" />
+<h:commandButton action="#{employeeStatusBean.update(employeeStatusBean.getempstat(employee.cin))}" value="Update/View Status" />
+
+
+
+</p:column>
+
+
+
+
+
+</p:dataTable>
+</h:form>
+
+
+<h:form>
+<h:panelGrid columns="2">
+
+			    <h:panelGrid columns="2">
+				<h:outputText value="Name"></h:outputText>
+				<p:inputText value="#{employeeStatusBean.employee_name}"></p:inputText>
+				<h:outputText value="Depatment"></h:outputText>
+				<p:inputText value="#{employeeStatusBean.department}"></p:inputText>
+				<h:outputText value="Job"></h:outputText>
+				<p:inputText value="#{employeeStatusBean.job}"></p:inputText>
+			
+                <h:outputText value="Team Leader"></h:outputText>
+				<p:inputText value="#{employeeStatusBean.team_leader}"></p:inputText>
+           
+      
+       <h:outputText value="N1"></h:outputText>
+	   <p:inputText value="#{employeeStatusBean.n1}"></p:inputText>
+	   <h:outputText value="Carrer_interview"></h:outputText>
+	   <p:inputText value="#{employeeStatusBean.carrer_interview}"></p:inputText>
+	  
+	   
+        
+				
+	   </h:panelGrid>
+	
+
+   
+
+
+
+</h:panelGrid>
+<p:commandButton action="#{employeeStatusBean.upadateemployeestatus()}" value="Update Status/Refresh Employee Status who's CIN ="></p:commandButton><input value="#{employeeStatusBean.employeetobeupadted}" readonly="readonly" ></input>
+</h:form>
+
+</body> 
+</ui:insert>
+
+
+              </div>
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    
+
+
+
+
+    <script src="../../resources/js/bootstrap.min.js"></script>
+<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+</body> 
+</html>

@@ -1,0 +1,150 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      template="/pages/template/master.xhtml"
+        xmlns:p="http://primefaces.org/ui">
+      
+<ui:define name="head"> 
+
+	<link rel="stylesheet" type="text/css"
+		href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"></link>
+
+	<script type="text/javascript" charset="utf8"
+		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+</ui:define>
+
+
+    <ui:define name="side"> 
+        <div class="list-group">
+              <a href="index.html" class="list-group-item active main-color-bg">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> 
+              </a>
+  			 <a href="http://localhost:18080/gestion-resources-humaine-web/pages/candidate/welcome.jsf" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Ajouter archive mail (.pst )</a>
+              <a href="http://localhost:18080/gestion-resources-humaine-web/pages/candidate/afficherCandidate.jsf" class="list-group-item"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Liste des Candidats </a> 
+    
+       </div>
+             
+
+        </ui:define>
+
+
+<ui:define name="main"> 
+
+<p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">
+    <p:graphicImage name="/demo/images/ajaxloadingbar.gif" />
+</p:dialog>
+
+<h:form enctype="multipart/form-data">
+<div class="container emp-profile">
+
+<h:panelGrid columns="2">
+
+				 <h:outputText value="ID" rendered="#{userBean.user.class.getSimpleName() eq 'Administrator'}"/>
+				<p:column headerText="ID"  rendered="#{userBean.user.class.getSimpleName() eq 'Administrator'}" >
+					<p:outputLabel value="#{candidateBean.toBeDisplayedCandidate.id}" rendered="#{userBean.user.class.getSimpleName() eq 'Administrator'}"/>
+				</p:column>
+				
+				<h:outputText value="Role" />
+				<p:column headerText="Role" >
+					<h:outputText value="#{candidateBean.toBeDisplayedCandidate.class.getSimpleName()}" />
+				</p:column>
+			
+				<h:outputText value="Email" />
+				<p:column headerText="Email" width="180">
+					<p:inputText value="#{candidateBean.toBeDisplayedCandidate.email}" />
+				</p:column>
+
+				<h:outputText value="Login" />
+				<p:column headerText="Login" >
+					<p:inputText value="#{candidateBean.toBeDisplayedCandidate.login}" />
+				</p:column>
+				
+				<h:outputText value="Nom" />
+				<p:column headerText="Login" >
+					<p:inputText value="#{candidateBean.toBeDisplayedCandidate.first_name}" />
+				</p:column>
+				
+				<h:outputText value="Prenom" />
+				<p:column headerText="Login" >
+					<p:inputText value="#{candidateBean.toBeDisplayedCandidate.last_name}" />
+				</p:column>
+				
+				<h:outputText value="Date de naissance" />
+				<p:column headerText="Login" >
+					<p:inputText value="#{candidateBean.toBeDisplayedCandidate.birthdate}" />
+				</p:column>
+
+				<h:outputText value="Age" />
+				<p:column headerText="Login" >
+					<p:inputText value="#{candidateBean.toBeDisplayedCandidate.age}" />
+				</p:column>
+				
+				<h:outputText value="Numero mobile" />
+				<p:column headerText="Login" >
+					<p:inputText value="#{candidateBean.toBeDisplayedCandidate.phone_number}" />
+				</p:column>
+				
+				<h:outputText value="Etat civil" />
+				<p:column headerText="Login" >
+					<p:inputText value="#{candidateBean.toBeDisplayedCandidate.socialState}" />
+				</p:column>
+				
+				<h:outputText value="Date enregistrement" />
+				<p:column headerText="Date enregistrement" width="150" style="text-align: center">
+					<p:outputLabel value="#{candidateBean.toBeDisplayedCandidate.registration_date}" />
+				</p:column>
+				
+				
+				<h:outputText value="Permis de conduire" />
+				<p:column headerText="Date enregistrement" width="150" style="text-align: center">
+					<p:inputText value="#{candidateBean.toBeDisplayedCandidate.driverLience}" />
+				</p:column>
+				
+				
+				<h:outputText value="Addresse" />
+				<p:column headerText="Login" >
+					<p:inputText value="#{candidateBean.toBeDisplayedCandidate.address}" />
+				</p:column>
+
+				<h:outputText value="Etat" />
+				<p:column headerText="Etat" width="100">
+					<p:inputText value="#{candidateBean.toBeDisplayedCandidate.status}" rendered="#{userBean.user.class.getSimpleName() ne 'Administrator'}"/>
+					       
+		 <p:selectOneMenu id="console"   value="#{userBean.admin_details.status}" rendered="#{userBean.user.class.getSimpleName() eq 'Administrator'}" >
+            <f:selectItem itemLabel="En attente" itemValue="pending" />
+            <f:selectItem itemLabel="Active" itemValue="active" />
+            <f:selectItem itemLabel="Bloqué" itemValue="blocked" />
+        </p:selectOneMenu>
+				</p:column>
+				
+				
+				<h:outputText value="Description" />
+				<p:column headerText="Login" >
+					<p:inputTextarea value="#{candidateBean.toBeDisplayedCandidate.description}" />
+				</p:column>
+				
+
+				<p:column headerText="Action" width="80">
+				
+				<p:commandButton value="Mettre a jour" icon="fa fa-fw fa-edit" style="color:green;position:relative; left:600px ;"  actionListener="#{candidateBean.updateCandidate()}" ajax="false" />
+
+	
+				</p:column>
+
+</h:panelGrid>
+
+</div>
+
+</h:form>		
+
+	
+		
+		
+
+
+
+</ui:define>
+</ui:composition>

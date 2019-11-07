@@ -1,0 +1,114 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/pages/template/master.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="head">
+
+
+
+
+	</ui:define>
+
+
+	<ui:define name="container">
+		<center>
+			<h:outputScript library="primefaces" name="jquery/jquery.js"
+				target="head" />
+			<div class="row">
+
+				<h:form class="col-md-4">
+					<h3>Ajouter critère</h3>
+					<h:panelGrid columns="2">
+						<h:outputText value="Description :" />
+						<h:inputText class="form-control"
+							value="#{cretereBean.critere.descrCritere}" />
+						<h:outputText value="Pourcentage :" />
+						<h:inputText class="form-control"
+							value="#{cretereBean.critere.pourcentage}" />
+						<h:commandButton class="btn btn-primary" value="ajouter"
+							action="#{cretereBean.doCreate()}" />
+					</h:panelGrid>
+				</h:form>
+				<div class="col-md-4">
+					<h3>Trouver critère</h3>
+					<h:form>
+
+
+						<div class="row">
+							<div class="col-md-6 col-md-offset-2">
+								<h:inputText  
+									placeholder="Critère de recherche..."  class="form-control"
+									value="#{cretereBean.recherche}" />
+
+							</div>
+							<div class="col-md-3">
+								<h:commandButton class="btn btn-primary" value="Rechercher"
+									action="#{cretereBean.doListerRecherche()}" />
+							</div>
+						</div>
+
+
+
+
+
+					</h:form>
+					<h3>Liste des critères</h3>
+					<h:dataTable class="table table-bordered" var="cri"
+						value="#{cretereBean.criteres}" style="margin-top:20px">
+						<h:column>
+							<f:facet name="header">Description</f:facet>
+							<h:outputText value="#{cri.descrCritere}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Pourcentage</f:facet>
+							<h:outputText value="#{cri.pourcentage}" />
+						</h:column>
+						<h:column>
+							<h:form>
+								<h:commandButton class="btn btn-danger"
+									style="margin-right:10px" action="#{cretereBean.doSupprimer()}"
+									value="supprimer">
+									<f:setPropertyActionListener value="#{cri.idCritere}"
+										target="#{cretereBean.idCritere}" />
+								</h:commandButton>
+							</h:form>
+						</h:column>
+						<h:column>
+							<h:form>
+								<h:commandButton class="btn btn-success"
+									action="#{cretereBean.doSelect()}" value="Selectionner">
+									<f:setPropertyActionListener value="#{cri.idCritere}"
+										target="#{cretereBean.idCritere}" />
+								</h:commandButton>
+							</h:form>
+						</h:column>
+					</h:dataTable>
+					<p:chart type="donut" model="#{statBean.donutModel2}"
+						style="width:400px;height:300px; margin-top:30px" />
+				</div>
+				<h:form class="col-md-4">
+					<h3>Modifier critère</h3>
+					<h:panelGrid columns="2">
+						<h:outputText value="Description :" />
+						<h:inputText class="form-control"
+							value="#{cretereBean.critereToUpdate.descrCritere}" />
+						<h:outputText value="Pourcentage :" />
+						<h:inputText class="form-control"
+							value="#{cretereBean.critereToUpdate.pourcentage}" />
+						<h:commandButton class="btn btn-primary" value="modifier"
+							action="#{cretereBean.doUpdate()}" />
+					</h:panelGrid>
+				</h:form>
+			</div>
+
+
+
+
+
+		</center>
+
+	</ui:define>
+</ui:composition>

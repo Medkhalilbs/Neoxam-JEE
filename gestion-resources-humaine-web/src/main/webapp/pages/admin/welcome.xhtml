@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      template="/pages/template/master.xhtml"
+        xmlns:p="http://primefaces.org/ui">
+      
+<ui:define name="head"> 
+
+
+
+
+</ui:define>
+
+    <ui:define name="side"> 
+        <div class="list-group">
+              <a href="index.html" class="list-group-item active main-color-bg">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> 
+              </a>
+  			 <a href="http://localhost:18080/gestion-resources-humaine-web/pages/admin/details_user.jsf" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>Informations</a>
+              <a href="http://localhost:18080/gestion-resources-humaine-web/pages/admin/details_user_log.jsf" class="list-group-item"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>Log connextion </a> 
+               <a href="http://localhost:18080/gestion-resources-humaine-web/pages/admin/listerUserst.jsf" class="list-group-item"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>Liste des utilisateurs </a>
+                <a href="http://localhost:18080/gestion-resources-humaine-web/pages/admin/add_user.jsf" class="list-group-item"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Ajouter un utilisateur</a> 
+       </div>
+               <p:tooltip />
+<!-- 	<p:stack icon="/resources/images/1.PNG" expanded="true"> -->
+<!-- 		<p:menuitem  icon="/resources/images/2.png" -->
+<!-- 			url="/afficherTopic.jsf" /> -->
+<!-- 		<p:menuitem  icon="/resources/images/3.png" url="/pages/chahnez/afficherTopic.jsf" /> -->
+<!-- 		<p:menuitem icon="/resources/images/4.png" url="/pages/chahnez/ajouterTopic.jsf" style="color:#ffffff;" /> -->
+<!-- 	</p:stack> -->
+        </ui:define>
+
+
+
+<ui:define name="main"> 
+<center>
+
+
+<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+
+
+</center>
+
+</ui:define>
+</ui:composition>

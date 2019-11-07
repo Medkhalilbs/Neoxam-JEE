@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+<h:dataTable var="projet" value="#{projetBean.afficherprojet()}">
+<h:column>
+<f:facet name="header">
+<h:outputText value="nom projet" />
+</f:facet>
+<h:outputText value="#{projet.nom}" />
+</h:column>
+<h:column>
+<f:facet name="header">
+<h:outputText value="status projet" />
+</f:facet>
+<h:outputText value="#{projet.status}" />
+</h:column>
+<h:column>
+<f:facet name="header">
+<h:outputText value="supprimer projet" />
+</f:facet>
+<h:form><h:commandButton action="#{projetBean.supprimerprojet(projet.id)}" value="supprimer" /></h:form>
+</h:column>
+
+</h:dataTable>
+</body> 
+</html>

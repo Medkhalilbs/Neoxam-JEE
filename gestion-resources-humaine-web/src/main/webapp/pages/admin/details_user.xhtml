@@ -1,0 +1,144 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      template="/pages/template/master.xhtml"
+        xmlns:p="http://primefaces.org/ui">
+      
+<ui:define name="head"> 
+
+	<link rel="stylesheet" type="text/css"
+		href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"></link>
+
+	<script type="text/javascript" charset="utf8"
+		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+</ui:define>
+
+
+    <ui:define name="side"> 
+        <div class="list-group">
+              <a href="index.html" class="list-group-item active main-color-bg">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> 
+              </a>
+  			 <a href="http://localhost:18080/gestion-resources-humaine-web/pages/admin/details_user.jsf" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>Informations</a>
+              <a href="http://localhost:18080/gestion-resources-humaine-web/pages/admin/details_user_log.jsf" class="list-group-item"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>Log connextion </a> 
+               <a href="http://localhost:18080/gestion-resources-humaine-web/pages/admin/listerUserst.jsf" class="list-group-item"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>Liste des utilisateurs </a>
+                <a href="http://localhost:18080/gestion-resources-humaine-web/pages/admin/add_user.jsf" class="list-group-item"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Ajouter un utilisateur</a>   
+            </div>
+               <p:tooltip />
+<!-- 	<p:stack icon="/resources/images/1.PNG" expanded="true"> -->
+<!-- 		<p:menuitem  icon="/resources/images/2.png" -->
+<!-- 			url="/afficherTopic.jsf" /> -->
+<!-- 		<p:menuitem  icon="/resources/images/3.png" url="/pages/chahnez/afficherTopic.jsf" /> -->
+<!-- 		<p:menuitem icon="/resources/images/4.png" url="/pages/chahnez/ajouterTopic.jsf" style="color:#ffffff;" /> -->
+<!-- 	</p:stack> -->
+        </ui:define>
+
+
+<ui:define name="main"> 
+
+
+<h:form enctype="multipart/form-data">
+<div class="container emp-profile">
+                <div >
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <h:graphicImage style="width: 275px;height: 183px" value="/uploads/#{userBean.admin_details.picture}" alt=""/>
+                            <div class="file btn btn-lg btn-primary" style="width: 275px">
+                                Changer Photo
+							<h:inputFile value="#{userBean.uploadedFile}"  />                            
+							</div>
+                        </div>
+                  </div>
+                  </div>
+
+
+ <div >
+  </div>
+<h:panelGrid columns="2">
+
+
+				 <h:outputText value="ID" />
+				<p:column headerText="ID"   >
+					<p:outputLabel value="#{userBean.admin_details.id}" />
+				</p:column>
+
+				<h:outputText value="Role" />
+				<p:column headerText="Role" >
+					<h:outputText value="#{userBean.admin_details.class.getSimpleName()}" />
+				</p:column>
+			
+				<h:outputText value="Email" />
+				<p:column headerText="Email" width="180">
+					<p:inputText value="#{userBean.admin_details.email}" />
+				</p:column>
+
+				<h:outputText value="Login" />
+				<p:column headerText="Login" >
+					<p:inputText value="#{userBean.admin_details.login}" />
+				</p:column>
+				
+				<h:outputText value="Nom" />
+				<p:column headerText="Login" >
+					<p:inputText value="#{userBean.admin_details.first_name}" />
+				</p:column>
+				
+				<h:outputText value="Prenom" />
+				<p:column headerText="Login" >
+					<p:inputText value="#{userBean.admin_details.last_name}" />
+				</p:column>
+
+				<h:outputText value="Numero mobile" />
+				<p:column headerText="Login" >
+					<p:inputText value="#{userBean.admin_details.phone_number}" />
+				</p:column>
+				
+				<h:outputText value="Addresse" />
+				<p:column headerText="Login" >
+					<h:outputText value="#{userBean.admin_details.address}" />
+				</p:column>
+
+				<h:outputText value="CIN" />
+				<p:column headerText="Login" >
+					<p:inputText value="#{userBean.admin_details.cin}" />
+				</p:column>
+				
+				
+				<h:outputText value="Date enregistrement" />
+				<p:column headerText="Date enregistrement" width="150" style="text-align: center">
+					<h:outputText value="#{userBean.user.registration_date}" />
+				</p:column>
+
+				<h:outputText value="Etat" />
+				<p:column headerText="Etat" width="100">
+					<h:outputText value="#{userBean.admin_details.status}" rendered="#{userBean.user.class.getSimpleName() ne 'Administrator'}"/>
+					       
+		 <p:selectOneMenu id="console"   value="#{userBean.admin_details.status}" rendered="#{userBean.user.class.getSimpleName() eq 'Administrator'}" >
+            <f:selectItem itemLabel="En attente" itemValue="pending" />
+            <f:selectItem itemLabel="Active" itemValue="active" />
+            <f:selectItem itemLabel="Bloqué" itemValue="blocked" />
+        </p:selectOneMenu>
+				</p:column>
+
+				<p:column headerText="Action" width="80">
+				<p:commandButton icon="fa fa-fw fa-edit" style="color:green;"  actionListener="#{userBean.updateUser()}" ajax="false" />
+
+	
+				</p:column>
+
+</h:panelGrid>
+
+</div>
+
+</h:form>		
+
+	
+		
+		
+
+
+
+</ui:define>
+</ui:composition>

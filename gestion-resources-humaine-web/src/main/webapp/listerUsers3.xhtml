@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"> 
+
+<h:head>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"></link>  
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+</h:head> 
+
+
+<body>  
+<div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-4">
+        <div class="ui-inputgroup">
+            <p:commandButton value="Recherche:"/> 
+            <p:inputText placeholder="mot clé" id="mySearchText"/>        
+        </div>
+    </div>
+</div>
+
+<h:form id="usersTableForm">
+   <h:dataTable value="#{userBean.listeUsers}" var="User"  id="usersTable" styleClass="display" >
+
+	
+	
+	<h:column>
+		<f:facet name="header">
+			<h:outputText value="ID" />
+		</f:facet>
+			<h:outputText value="#{User.id}" />
+	</h:column>
+
+	<h:column>
+		<f:facet name="header">
+			<h:outputText value="Email" />
+		</f:facet>
+			<h:outputText value="#{User.email}" />
+	</h:column>
+	
+		<h:column>
+		<f:facet name="header">
+			<h:outputText value="Login" />
+		</f:facet>
+			<h:outputText value="#{User.login}" />
+		</h:column>
+	
+		<h:column>
+		<f:facet name="header">
+			<h:outputText value="Date enregistrement" />
+		</f:facet>
+			<h:outputText value="#{User.registration_date}" />
+		</h:column>
+		
+		
+	<h:column >
+	<f:facet name="header">
+	<h:outputText value="Action" />
+	</f:facet>
+		<h:commandButton action="#{userBean.removeUser(User.id)}" value="Supprimer"/>
+
+		<h:commandButton action="#{userBean.removeUser(User.id)}" value="Modifier"/>
+	</h:column>	
+	
+
+</h:dataTable>
+</h:form>
+
+
+
+       		<script type="text/javascript">
+       	//<![CDATA[ 
+       	
+$(document).ready( function () {
+	var table =$('#usersTableForm\\:usersTable').DataTable(
+			{
+		        "scrollY":        "200px",
+		        "scrollCollapse": true,
+		        "paging":         false,
+		        "order": [[ 3, "desc" ]],
+		        "language": {
+		            "search": "Rchercher:"
+		          },
+		        "dom": '<"top"i>rt<"bottom"><"clear">'  
+		    }
+			);
+
+
+
+
+$(document).ready(function (e) {
+    $('#mySearchText').keyup(
+    		 function () 
+    		 {
+		
+    			  table.search($('#mySearchText').val()).draw();
+		  
+    		 }
+
+)});
+
+} );
+
+
+
+//]]>
+</script>
+
+</body> 
+</html>

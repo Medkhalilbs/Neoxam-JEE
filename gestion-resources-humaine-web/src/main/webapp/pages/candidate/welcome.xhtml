@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/pages/template/master.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="head">
+
+
+
+
+	</ui:define>
+
+	<ui:define name="side">
+		<div class="list-group">
+			<a href="index.html" class="list-group-item active main-color-bg">
+				<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+			</a> <a
+				href="http://localhost:18080/gestion-resources-humaine-web/pages/candidate/welcome.jsf"
+				class="list-group-item"><span
+				class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+				Ajouter archive mail (.pst )</a> <a
+				href="http://localhost:18080/gestion-resources-humaine-web/pages/candidate/afficherCandidate.jsf"
+				class="list-group-item"><span
+				class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+				Liste des Candidats </a>
+
+		</div>
+
+
+	</ui:define>
+
+
+
+	<ui:define name="main">
+
+
+		<h2 align="center">Ajouter votre archive mail (.pst)</h2>
+		<center>
+			<h:form enctype="multipart/form-data" style="width:500px">
+
+				<p:fileUpload value="#{candidateBean.file}" mode="advanced"
+					fileUploadListener="#{candidateBean.fileUploadListener}"
+					update="messages"></p:fileUpload>
+				<p:growl id="messages" showDetail="true" life="20000" />
+
+			</h:form>
+		</center>
+		<center>
+
+			<h:outputScript library="primefaces" name="jquery/jquery.js"
+				target="head" />
+
+		</center>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      template="/pages/template/master.xhtml"
+        xmlns:p="http://primefaces.org/ui">
+      
+<ui:define name="head"> 
+
+	<link rel="stylesheet" type="text/css"
+		href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"></link>
+
+	<script type="text/javascript" charset="utf8"
+		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+</ui:define>
+
+
+    <ui:define name="side"> 
+        <div class="list-group">
+              <a href="index.html" class="list-group-item active main-color-bg">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> 
+              </a>
+  			 <a href="http://localhost:18080/gestion-resources-humaine-web/pages/user/details_user.jsf" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>Informations</a>
+              <a href="http://localhost:18080/gestion-resources-humaine-web/pages/user/details_user_log.jsf" class="list-group-item"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>Log connextion </a>               
+       </div>
+               <p:tooltip />
+	<p:stack icon="/resources/images/1.PNG" expanded="true">
+		<p:menuitem  icon="/resources/images/2.png"
+			url="/afficherTopic.jsf" />
+		<p:menuitem  icon="/resources/images/3.png" url="/pages/chahnez/afficherTopic.jsf" />
+		<p:menuitem icon="/resources/images/4.png" url="/pages/chahnez/ajouterTopic.jsf" style="color:#ffffff;" />
+	</p:stack>
+        </ui:define>
+
+
+<ui:define name="main"> 
+<center>
+
+<h:form>
+
+
+
+<p:dataTable value="#{userBean.getListeUser_logsByUserID(userBean.user_details.id)}" var="user_log">
+				
+			<p:column headerText="Adresse IP:">
+                <h:outputText value="#{user_log.ip_address}" />
+ 			</p:column>
+ 			
+ 			<p:column headerText="Pay:">
+                <h:outputText value="#{user_log.country}" />
+ 			</p:column>
+ 			
+ 			<p:column headerText="Date de connexion:">
+                <h:outputText value="#{user_log.login_timestamp}" />
+ 			</p:column>
+ 			
+ 			 <p:column headerText="Date de deconnexion:">
+                <h:outputText value="#{user_log.logout_timestamp}" />
+ 			</p:column>
+ 			
+ 			 <p:column headerText="Id PC:">
+                <h:outputText value="#{user_log.pc_id}" />
+ 			</p:column>
+ 			
+ 			 <p:column headerText="Id session:">
+                <h:outputText value="#{user_log.session_id}" />
+ 			</p:column>
+ 			
+
+				</p:dataTable>
+				
+				<h:commandLink action="#{userBean.createUserLogPDF(userBean.user_details.id)}">
+				<img id="imagePDF" src="http://localhost:18080/gestion-resources-humaine-web/resources/pdf.png" height="30" width="30"  />
+				</h:commandLink>
+</h:form>		
+
+	
+		
+		
+
+</center>
+
+</ui:define>
+</ui:composition>

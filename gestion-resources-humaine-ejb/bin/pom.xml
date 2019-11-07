@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>tn.neoxam.gestionresourceshumaine</groupId>
+		<artifactId>gestion-resources-humaine</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>gestion-resources-humaine-ejb</artifactId>
+	<packaging>ejb</packaging>
+
+
+
+	<dependencies>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>4.3.10.Final</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.1.0.Final</version>
+            			<scope>provided</scope>
+            
+        </dependency>
+        <dependency>
+ 			 <groupId>org.glassfish.soteria</groupId>
+ 			 <artifactId>javax.security.enterprise</artifactId>
+ 			 <version>1.0</version><!-- Stable version -->
+		</dependency>
+		
+		<!-- Omnifaces, develop JSF never easier without Omnifaces -->
+	    <dependency>
+	        <groupId>org.omnifaces</groupId>
+	        <artifactId>omnifaces</artifactId>
+	        <version>2.6.4</version>
+	    </dependency>
+	    <dependency>
+		    <groupId>commons-validator</groupId>
+		    <artifactId>commons-validator</artifactId>
+		    <version>1.4.1</version>
+		</dependency>
+		<dependency>
+  		<groupId>org.jboss.resteasy</groupId>
+  		<artifactId>resteasy-jaxrs</artifactId>
+  		<scope>provided</scope>
+  		<version>3.0.19.Final</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>javax.transaction</groupId>
+  		<artifactId>javax.transaction-api</artifactId>
+  		<version>1.2</version>
+  	</dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.6.0</version>
+        </dependency>
+        
+
+   
+		
+	</dependencies>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ejb-plugin</artifactId>
+				<version>${version.ejb.plugin}</version>
+				<configuration>
+					<ejbVersion>3.2</ejbVersion>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

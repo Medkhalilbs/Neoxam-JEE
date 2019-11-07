@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<body> 
+<h:form>
+<nav class="navbar navbar-default" >
+      <div class="container" >
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Gestion RH</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html">Accueil</a></li>
+            <li> <p:commandLink action="#{userBean.voirCompte()}" value="Compte" /> </li>
+            <li><a href="pages.html">Candidate</a></li>
+            <li><a href="http://localhost:18080/gestion-resources-humaine-web/pages/chahnez/tmplate.jsf">Test</a></li>
+            <li><a href="http://localhost:18080/gestion-resources-humaine-web/pages/Skima/listemployee.jsf">Employe</a></li>
+             <li><a href="users.html">Conge</a></li>
+              <li><a href="users.html">Risque</a></li>
+               <li><a href="http://localhost:18080/gestion-resources-humaine-web/pages/Skima/listemployeestatus.jsf">Suivi</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Bienvenue #{userBean.user.login}</a></li>
+            <li>   <p:commandLink action="#{loginBean.doLogout()}" value="Déconnexion" />  </li>
+           
+   
+          </ul> 
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+</h:form>
+<header id="header">
+      <div class="container" style="width: 1300px">
+        <div class="row">
+          <div class="col-md-10">
+            <h1><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> NeoXam <small></small></h1>
+          </div>
+         
+        </div>
+      </div>
+    </header>
+    
+     <section id="breadcrumb">
+      <div class="container">
+        <ol class="breadcrumb" >
+          <li class="active" >Gestion des ressources humaines</li>
+        </ol>
+      </div>
+    </section>
+    
+    
+</body> 
+</html>

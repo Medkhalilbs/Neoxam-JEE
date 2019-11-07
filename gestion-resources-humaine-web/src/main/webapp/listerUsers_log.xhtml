@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"> 
+
+<h:head>
+
+
+
+</h:head> 
+<body>  
+<div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-4">
+        <div class="ui-inputgroup">
+            <p:commandButton value="Search"/> 
+            <p:inputText placeholder="Keyword" />        
+        </div>
+    </div>
+</div>
+
+<h:form id="actorsTableForm">
+   <p:dataTable value="#{userBean.getListeUser_logsByUserID()}" var="UserLog" border="1" >
+
+
+		
+
+		<p:column headerText="ID">
+			<h:outputText value="#{UserLog.id}" />
+		</p:column>
+
+	<p:column headerText="IP address">
+			<h:outputText value="#{UserLog.ip_address}" />
+	</p:column>
+	
+		<p:column headerText="Date login">
+			<h:outputText value="#{UserLog.login_timestamp}" />
+		</p:column>
+	
+		<p:column headerText="Date logout">
+			<h:outputText value="#{UserLog.logout_timestamp}" />
+		</p:column>
+	
+		<p:column headerText="Session ID">
+			<h:outputText value="#{UserLog.session_id}" />
+		</p:column>
+		
+		<p:column headerText="PC ID">
+			<h:outputText value="#{UserLog.pc_id}" />
+		</p:column>
+	
+
+</p:dataTable>
+
+</h:form>
+
+
+
+</body> 
+</html>

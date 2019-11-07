@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title> Gestion des ressources humaines</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="../../resources/css/style.css" rel="stylesheet" />
+
+
+
+
+</h:head> 
+<body> 
+
+
+<ui:include src="/pages/template/header.xhtml" />
+
+
+
+
+<section id="main">
+      <div class="container">
+        <div class="row">
+          
+          <div class="col-md-12">
+            <!-- Website Overview -->
+            <div class="panel panel-default">
+              
+              <div class="panel-body">
+              
+              
+<ui:insert name="main">
+
+<h:form id="form" enctype="multipart/form-data">
+
+							<h:outputText value="Department" />
+							<h:inputText  value="#{uploadFileBean.department}" />
+							 
+							 <h:outputText value="Deadline" />
+							<h:inputText value="#{uploadFileBean.deadline}" />
+							 
+							<h:outputText value="Télécharger votre photo" />
+							<h:inputFile id="file1" value="#{uploadFileBean.file1}" />
+							<h:commandButton action="#{uploadFileBean.upload()}" value="upload" />
+							
+</h:form>
+ </ui:insert>
+
+
+              </div>
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    
+
+
+
+
+    <script src="../../resources/js/bootstrap.min.js"></script>
+<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+</body> 
+</html>

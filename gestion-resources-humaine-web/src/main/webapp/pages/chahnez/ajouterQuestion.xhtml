@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head> 
+<body> 
+<h:form id="form">
+   <h:panelGrid id="grid" columns="3" cellpadding="5">
+<!--         <p:outputLabel for="default" value="Enonce" /> -->
+<!--         <p:inputText id="default" required="true" value="#{questionBean.enonce}"/> -->
+<!--         <p:message for="default" /> -->
+        
+<!--          <p:outputLabel for="de" value="Complexite" /> -->
+<!--         <p:inputText id="de" required="true" value="#{questionBean.complexity}"/> -->
+<!--         <p:message for="de" /> -->
+        
+<!--         <p:outputLabel for="p" value="Point" /> -->
+<!--         <p:inputText id="p" required="true" value="#{questionBean.point}"/> -->
+<!--         <p:message for="p" /> -->
+<!--         </h:panelGrid >  -->
+        </h:panelGrid>  
+<h:commandButton id="bnt" action="#{questionBean.doAdd()}" value="Ajouter question" />
+
+
+
+<h:message for="btn" />
+
+
+</h:form>
+
+</body> 
+</html>

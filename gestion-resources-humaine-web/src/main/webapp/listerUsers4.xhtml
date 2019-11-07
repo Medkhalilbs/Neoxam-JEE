@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+<!-- 	<link rel="stylesheet" type="text/css" -->
+<!-- 		href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"></link> -->
+
+<!-- 	<script type="text/javascript" charset="utf8" -->
+<!-- 		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script> -->
+
+
+
+</h:head>
+
+
+<body>
+	<div class="ui-g ui-fluid">
+		<div class="ui-g-12 ui-md-4">
+			<div class="ui-inputgroup">
+				<p:commandButton value="Recherche:" />
+				<p:inputText placeholder="mot clé" id="mySearchText" />
+			</div>
+		</div>
+
+	</div>
+
+	<div style="width: 80%">
+
+		<div>
+			Filtrer colonne: <a class="toggle-vis" data-column="0" href="#">ID</a>
+			- <a class="toggle-vis" data-column="1" href="#">Email</a> - <a
+				class="toggle-vis" data-column="2" href="#">Login</a> - <a
+				class="toggle-vis" data-column="3" href="#">Date enregistrement</a>
+			- <a class="toggle-vis" data-column="4" href="#">Action</a>
+		</div>
+
+		<h:form id="usersTableForm">
+			<p:dataTable value="#{userBean.listeUsers}" var="User"
+				id="usersTable" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"
+				tableStyle="table-layout:auto" widgetVar="usersTable" filteredValue="#{userBean.filteredUsers}" emptyMessage="No Users found for the given Filters">
+
+
+
+				<p:column headerText="ID" footerText="id"  filterBy="#{User.id}">
+					<h:outputText value="#{User.id}" />
+				</p:column>
+
+				<p:column headerText="Role" footerText="role" >
+					<h:outputText value="#{User.class.getSimpleName()}" />
+				</p:column>
+
+				<p:column headerText="Email" footerText="email">
+					<h:outputText value="#{User.email}" />
+				</p:column>
+
+				<p:column headerText="Login" footerText="login">
+					<h:outputText value="#{User.login}" />
+				</p:column>
+
+				<p:column headerText="Date enregistrement" footerText="date">
+					<h:outputText value="#{User.registration_date}" />
+				</p:column>
+
+				<p:column headerText="Etat" footerText="status" filterBy="#{User.status}" filterMatchMode="status">
+            <f:facet name="filter">
+                <p:selectOneButton onchange="PF('usersTable').filter()">
+                    <f:converter converterId="javax.faces.Character" />
+                    <f:selectItem itemLabel="pending" itemValue="" />
+                    <f:selectItem itemLabel="active" itemValue="true" />
+                    <f:selectItem itemLabel="blocked" itemValue="false" />
+                </p:selectOneButton>
+            </f:facet>
+					<h:outputText value="#{User.status}" />
+				</p:column>
+
+				<p:column headerText="Action" footerText="action">
+					<h:commandButton action="#{userBean.removeUser(User.id)}"
+						value="Supprimer" />
+
+					<h:commandButton action="#{userBean.removeUser(User.id)}"
+						value="Modifier" />
+				</p:column>
+
+
+
+			</p:dataTable>
+
+		</h:form>
+	</div>
+
+
+
+	<script type="text/javascript">
+       	//<![CDATA[ 
+
+// $(document).ready( function () {
+
+
+// 	var table =$('#usersTableForm\\:usersTable').find("table").DataTable(
+// 			{
+// 		        "scrollY":        "400px",
+// 		        "scrollCollapse": true,
+// 		        "paging":         false,
+// 		        "order": [[ 3, "desc" ]],
+// 		        "language": {
+// 		            "search": "Rchercher:"
+// 		          },
+// 		        "dom": '<"top"i>rt<"bottom"><"clear">',  //enleve le texte au dessus du tableau
+		        
+// 		    }
+// 			);
+
+//
+
+
+	
+
+//input recherche pour chaque colonne
+
+// $('#usersTableForm\\:usersTable_foot tr td').each( function () {
+//         var title = $(this).text();
+//         $(this).html( '<input type="text" placeholder="Recherche par '+title+'" />' );
+//     } );
+
+// var table = $('#usersTableForm\\:usersTable').find("table").DataTable();
+
+// // Apply the search
+// table.columns().every( function () {
+//     var that = this;
+
+//     $( 'input', this.footer() ).on( 'keyup change', function () {
+//         if ( that.search() !== this.value ) {
+//             that
+//                 .search( this.value )
+//                 .draw();
+//         }
+//     } );
+// } );
+	
+
+
+//pour le formulaire dans le tableau
+
+// $('button').click( function() {
+//         var data = table.$('input, select').serialize();
+//         alert(
+//             "The following data would have been submitted to the server: \n\n"+
+//             data.substr( 0, 120 )+'...'
+//         );
+//         return false;
+//     } );
+
+
+
+
+
+
+	
+//filtrage colonne
+
+// 	 $('a.toggle-vis').on( 'click', function (e) {
+// 	        e.preventDefault();
+	 
+// 	        // Get the column API object
+// 	        var column = table.column( $(this).attr('data-column') );
+	 
+// 	        // Toggle the visibility
+// 	        column.visible( ! column.visible() );
+// 	    } );
+
+
+
+//changement zone recherche de text	
+
+
+// $(document).ready(function (e) {
+//     $('#mySearchText').keyup(
+//     		 function () 
+//     		 {
+		
+//     			  table.search($('#mySearchText').val()).draw();
+// //     			  table.columns.adjust().draw();
+		  
+//     		 }
+
+// )});
+
+// } );
+
+
+
+//]]>
+</script>
+
+</body>
+</html>

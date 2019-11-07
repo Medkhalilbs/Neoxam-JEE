@@ -1,0 +1,495 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      template="/pages/template/master.xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+      
+<ui:define name="head"> 
+
+<script src="http://maps.google.com/maps/api/js?key=AIzaSyAjsIpyXFoB7_5_E2DgO_-CTDMHKM0cW4I" type="text/javascript"></script>
+
+
+
+
+
+
+
+</ui:define>
+
+    <ui:define name="side"> 
+        <div class="list-group">
+              <a href="index.html" class="list-group-item active main-color-bg">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> 
+              </a>
+  			 <a href="http://localhost:18080/gestion-resources-humaine-web/pages/admin/details_user.jsf" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>Informations</a>
+              <a href="http://localhost:18080/gestion-resources-humaine-web/pages/admin/details_user_log.jsf" class="list-group-item"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>Log connextion </a> 
+               <a href="http://localhost:18080/gestion-resources-humaine-web/pages/admin/listerUserst.jsf" class="list-group-item"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>Liste des utilisateurs </a>
+                <a href="http://localhost:18080/gestion-resources-humaine-web/pages/admin/add_user.jsf" class="list-group-item"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Ajouter un utilisateur</a> 
+             </div>
+               <p:tooltip />
+<!-- 	<p:stack icon="/resources/images/1.PNG" expanded="true"> -->
+<!-- 		<p:menuitem  icon="/resources/images/2.png" -->
+<!-- 			url="/afficherTopic.jsf" /> -->
+<!-- 		<p:menuitem  icon="/resources/images/3.png" url="/pages/chahnez/afficherTopic.jsf" /> -->
+<!-- 		<p:menuitem icon="/resources/images/4.png" url="/pages/chahnez/ajouterTopic.jsf" style="color:#ffffff;" /> -->
+<!-- 	</p:stack> -->
+        </ui:define>
+<ui:define name="main"> 
+
+  			
+
+
+<!-- 	<h:form id="form" > -->
+			<h:form id="form" >
+		
+
+ 		<p:outputLabel for="console" value="Role:" />
+				<p:column   >
+        <p:selectOneMenu id="console"   value="#{userBean.performedBy}">
+            <f:selectItem itemLabel="Utilisateur" itemValue="Utilisateur" />
+            <f:selectItem itemLabel="Administrateur" itemValue="Administrateur" />
+            <f:selectItem itemLabel="Candidat" itemValue="Candidat" />
+            <f:selectItem itemLabel="Employe" itemValue="Employe" />
+            <f:ajax event="change" execute="@this" render="perfbyselection perfbyselection2"  />
+        </p:selectOneMenu>
+				</p:column>
+				<p:column>  </p:column>
+
+		<h:panelGrid id="perfbyselection"  columns="3">
+		
+		<h:outputText value="*Email address"  />
+		<h:column>
+			<div class="ui-g ui-fluid">
+	   		 <div class="ui-g-12 ui-md-4">
+	      	  <div class="ui-inputgroup">
+			<span class="ui-inputgroup-addon"><i class="fa fa-envelope-square"></i></span>
+			<p:inputText type="email"  placeholder="aaa@bb.cc" value="#{userBean.email}"  id="email" style="width:200px">
+			<f:validator binding="#{registerEmailValidator}" />
+			<p:ajax event="keyup" update="emailMessage" />
+			</p:inputText>
+			 </div>
+	   		</div>       
+	     	</div>
+   		</h:column>
+		
+		<h:column>
+			<div style="display: inline-block" id="icone1">
+<!-- 			<b:iconAwesome value="close" size="2x" style="color:red;"/>  Veillez saisir une addresse mail<br/> -->
+		    </div>	
+		    <h:message  id="emailMessage" for="email" style="color:red" />
+		</h:column>
+		
+		
+		
+		<h:outputText value="*Login" />
+		<h:column>
+			<div class="ui-g ui-fluid">
+	   		 <div class="ui-g-12 ui-md-4">
+	      	  <div class="ui-inputgroup">
+			<span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+			<p:inputText type="text"  value="#{userBean.login}" id="login" style="width:200px">	
+				<f:validator binding="#{registerLoginValidator}" />
+				<p:ajax event="keyup" update="loginMessage" />
+			</p:inputText>
+			 </div>
+	   		</div>       
+	     	</div>
+   		</h:column>
+		
+		<h:column>
+			<div style="display: inline-block" id="icone2">
+<!-- 			<b:iconAwesome value="close" size="2x" style="color:red;"/>  Veillez saisir un login<br/> -->
+		    </div>	
+		     <h:message  id="loginMessage" for="login" style="color:red" />
+		</h:column>
+		
+		<h:outputText value="*Password" />
+		<h:column>
+			<div class="ui-g ui-fluid">
+	   		 <div class="ui-g-12 ui-md-4">
+	      	  <div class="ui-inputgroup">
+			<span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
+		<p:password value="#{userBean.password}" id="password" feedback="true" inline="true" style="width:200px" />
+					 </div>
+	   		</div>       
+	     	</div>
+   		</h:column>
+   		
+   		
+		<h:column>
+			<div style="display: inline-block" id="icone3">
+<!-- 			<b:iconAwesome value="close" size="2x" style="color:red;"/>  Veillez saisir un mot de passe<br/> -->
+		    </div>	
+		</h:column>
+		
+		<h:outputText value="*Confirm Password" />
+		<h:column>
+			<div class="ui-g ui-fluid">
+	   		 <div class="ui-g-12 ui-md-4">
+	      	  <div class="ui-inputgroup">
+			<span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
+		<p:password value="#{userBean.confirm_password}" id="confirm_password" style="width:200px" />
+					 </div>
+	   		</div>       
+	     	</div>
+   		</h:column>
+   		
+		<h:column>
+			<div style="display: inline-block" id="icone4">
+<!-- 			<b:iconAwesome value="close" size="2x" style="color:red;"/>  Veillez confirmer votre mot de passe<br/> -->
+		    </div>	
+		</h:column>
+		   
+		   
+		   
+		   
+		   
+		<h:outputText value="Numero Mobile" />
+		<h:column>
+			<div class="ui-g ui-fluid">
+	   		 <div class="ui-g-12 ui-md-4">
+	      	  <div class="ui-inputgroup">
+			<span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+		<p:inputText value="#{userBean.phone_Number}" id="phone_number" style="width:200px" />   
+					 </div>
+	   		</div>       
+	     	</div>
+   		</h:column>
+		<h:column>
+		</h:column> 
+		   
+		   
+		 <h:outputText value="Nom" rendered="#{userBean.performedBy eq 'Administrateur'}" />
+		 		<h:column rendered="#{userBean.performedBy eq 'Administrateur'}">
+			<div class="ui-g ui-fluid">
+	   		 <div class="ui-g-12 ui-md-4">
+	      	  <div class="ui-inputgroup">
+			<span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+		<p:inputText value="#{userBean.nom}" id="nom" rendered="#{userBean.performedBy eq 'Administrateur'}" style="width:200px" />
+		
+							 </div>
+	   		</div>       
+	     	</div>
+   		</h:column>
+   		<h:column>
+		</h:column> 
+		   
+		<h:outputText value="Prenom" rendered="#{userBean.performedBy eq 'Administrateur'}"/>
+				<h:column rendered="#{userBean.performedBy eq 'Administrateur'}">
+			<div class="ui-g ui-fluid">
+	   		 <div class="ui-g-12 ui-md-4">
+	      	  <div class="ui-inputgroup">
+			<span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+		<p:inputText value="#{userBean.prenom}" id="prenom" rendered="#{userBean.performedBy eq 'Administrateur'}" style="width:200px" />
+						 </div>
+	   		</div>       
+	     	</div>
+   		</h:column>
+		<h:column>
+		</h:column> 
+		   
+		<h:outputText value="CIN" rendered="#{userBean.performedBy eq 'Administrateur'}"/>
+				<h:column rendered="#{userBean.performedBy eq 'Administrateur'}">
+			<div class="ui-g ui-fluid">
+	   		 <div class="ui-g-12 ui-md-4">
+	      	  <div class="ui-inputgroup">
+			<span class="ui-inputgroup-addon"><i class="fa fa-id-card"  rendered="#{userBean.performedBy eq 'Administrateur'}" ></i></span>
+		<p:inputText value="#{userBean.cin}" id="cin" rendered="#{userBean.performedBy eq 'Administrateur'}" style="width:200px"  />
+							 </div>
+	   		</div>       
+	     	</div>
+   		</h:column>
+		<h:column>
+		</h:column> 
+		
+		 <h:outputText value="Addresse" rendered="#{userBean.performedBy eq 'Administrateur'}"/>
+		<p:outputLabel value="#{userBean.address}" id="addresse" rendered="#{userBean.performedBy eq 'Administrateur'}"/>
+		<h:column>
+		</h:column> 
+		   
+		   
+
+
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   <h:column>
+		   <div style="display: inline-block" id="buttonRegister">
+		<p:commandButton id="btn" action="#{userBean.UserRegister()}" onclick="return checkPassword(); " value="Ajouter"  update="messages" />
+		</div>
+		</h:column>
+		
+		<p:remoteCommand name="callRemoteMethod" actionListener="#{userBean.checkIfEmailAndLoginConstraint()}" oncomplete="getLayoutAreSelectedResult(xhr, status, args);" />
+
+		<h:message for="btn"/>
+		</h:panelGrid>
+	</h:form>
+	
+			<!--  <h:inputText value="#{userBean.email}" onkeyup="return filtreNombre(event) "/> -->	
+			   <h:form prependId="false">
+			   <h:panelGrid id="perfbyselection2"  columns="3">
+            <p:growl id="messages" showDetail="true" life="20000"  />
+
+            <p:gmap center="41.381542, 2.122893" id="map" zoom="15" type="ROADMAP" widgetVar="map"  style="width:600px;height:400px" onPointClick="handlePointClick(event);"  rendered="#{userBean.performedBy eq 'Administrateur'}" >
+
+            </p:gmap> 
+            <p:remoteCommand name="onPoint" actionListener="#{userBean.onPointSelect}" update="messages form:addresse" />
+            <h:inputHidden  id="address"  value="#{userBean.mapAddress}" >
+
+            </h:inputHidden>
+            <h:inputHidden id="lat" value="#{userBean.lat}" />
+            <h:inputHidden id="lng" value="#{userBean.lng}" />
+</h:panelGrid>
+        </h:form>
+	
+
+
+	
+	     <script>
+         var loader = "/gestion-resources-humaine-web/loupe.gif"; //link to the animated loader-small.gif
+     </script>
+
+
+<!-- <h:outputScript library="js" name="jquery.min.js" target="head"/> -->
+<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+
+
+
+  	<!--	<script>  
+//Ne marche plus a cause du mail et login validator , il ecrase le flux entrant json		
+		var x=0;
+		 var returnedValue;
+		 $(document).ready(function (e) {
+         $('#form\\:email').keyup(
+             function () 
+             { 	 $('#icone1').html('<img src="' + window.loader + '" height="28" width="28"/>'); 
+                 callRemoteMethod();
+                
+
+
+            	 window.getLayoutAreSelectedResult= function(xhr, status, args) {
+            	       returnedValue = args.returnedValue;
+            	       console.log("returnedValue 1= "+returnedValue);
+
+
+                         x=x+1;
+                         console.log(x );
+                         console.log("this is %o, event is %o, host is %s", this, e, location.host);
+                         console.log("%s", new Error().stack);
+                         
+                         if (returnedValue=='1')
+                       	 {
+                        	 $('#icone1').html('<b:iconAwesome value="close" size="2x" style="color:red;"/>  Cette Address mail existe deja<br/>');  	 
+                       	 //alert("email exist car "+x);
+                       	 }
+                         else if (returnedValue=='3')
+                       	 {
+                        	 $('#icone1').html('<b:iconAwesome value="close" size="2x" style="color:red;"/>  Cette Address mail est invalide<br/>');  	 
+                       	 //alert("email exist car "+x);
+                       	 }
+                         else if (returnedValue==null) //je lai ajouter a cause du validator qui donne nul qu'on il est activé
+                       	 {
+                        	 {$('#icone1').html('<b:iconAwesome value="close" size="2x" style="color:red;"/> <br/>');}
+                       	 //alert("email exist car "+x);
+                       	 }
+                         else if ($('#form\\:email').val()=='')
+                        	 {$('#icone1').html('<b:iconAwesome value="close" size="2x" style="color:red;"/>  Veillez saisir une addresse mail<br/>');}
+                        else   
+                        	 {$('#icone1').html('<b:icon value="check" size="lg" style="color:green;" /><br/>');}
+            	    }
+
+
+         
+
+             });
+		 });
+			
+     </script>
+
+  
+  
+    
+  
+       		<script type="text/javascript">
+//<![CDATA[ 
+       		
+		var x=0;
+		 var returnedValue;
+		 $(document).ready(function (e) {
+         $('#form\\:login').keyup(
+             function () 
+             { 	 $('#icone2').html('<img src="' + window.loader + '" height="28" width="28"/>'); 
+                 callRemoteMethod();
+                
+
+
+            	 window.getLayoutAreSelectedResult= function(xhr, status, args) 
+            	 {
+            	       returnedValue = args.returnedValue;
+            	       console.log("returnedValue 1= "+returnedValue);
+                       x=x+1;
+                       console.log(x );
+                       console.log("this is %o, event is %o, host is %s", this, e, location.host);
+                       console.log("%s", new Error().stack);
+                       console.log("returnedValue 2= "+returnedValue);
+                         
+                         if (returnedValue=='2' )
+                       	 {
+                        	 $('#icone2').html('<i id="oo" class="fa fa-close fa-2x" style="color:red;"></i>  Ce login existe deja');  	 
+                       	 //alert("email exist car "+x);
+                       	 }
+                         else if( returnedValue==null) // je l'ai ajouter a cause du validator
+                         {
+                        	 $('#icone2').html('<i id="oo" class="fa fa-close fa-2x" style="color:red;"></i> ');  	 
+                       	 //alert("email exist car "+x);
+                       	 }
+                         else if (($('#form\\:login').val().length) < 4)
+                    	 {$('#icone2').html('<i id="kk" class="fa fa-close fa-2x" style="color:red;"><font size="-1"></i> Veillez saisir login de minimum 4 charcatere</font>');}
+                         else   
+                    	 {$('#icone2').html('<i id="ll" class="glyphicon glyphicon-check fa-lg" style="color:green;"></i>');}
+            	 }
+         
+             }
+            );
+		 });
+			
+		//]]>
+		 </script>
+-->
+
+<script type="text/javascript">
+$(document).ready(function (e) {
+    $('#form\\:confirm_password').keyup(
+    		 function () 
+    		 {
+		var test=$('#form\\:confirm_password').val();
+    		console.log(  "valeur password= "+ test    );
+		
+		  if(($('#form\\:confirm_password').val()) !=  ($('#form\\:password').val()) ) 
+			{$('#icone4').html('<i id="jj" class="fa fa-close fa-2x" style="color:red;"></i>  Veillez verifier votre mot de passe'); }
+		  else if ($('#form\\:confirm_password').val()=='')
+     	 {$('#icone1').html('<b:iconAwesome value="close" size="2x" style="color:red;"/>  Veillez confirmer votre mot de passe<br/>');}
+		  else 
+			{$('#icone4').html('<i id="aa" class="glyphicon glyphicon-check fa-lg" style="color:green;"></i>');}
+		  
+    		 }
+
+)});
+
+
+ </script>
+ 
+ 
+ <script type="text/javascript">
+//<![CDATA[ 
+  function checkPassword()
+  {console.log(  "checkPassword executed "    );
+	   var password=($('#form\\:password').val());
+    if(password == "") {
+      //alert("Error: Username cannot be blank!");
+      //form.username.focus();
+      return false;
+    }
+
+
+    if(password != "" ) {
+      if(password.length < 6) {
+        //alert("Error: Password must contain at least six characters!");
+        //form.pwd1.focus();
+        return false;
+      }
+
+      re = /[0-9]/;
+      if(!re.test(password)) {
+        //alert("Error: password must contain at least one number (0-9)!");
+        //form.pwd1.focus();
+        return false;
+      }
+      re = /[a-z]/;
+      if(!re.test(password)) {
+       // alert("Error: password must contain at least one lowercase letter (a-z)!");
+       // form.pwd1.focus();
+        return false;
+      }
+      re = /[A-Z]/;
+      if(!re.test(password)) {
+       // alert("Error: password must contain at least one uppercase letter (A-Z)!");
+        //form.pwd1.focus();
+        return false;
+      }
+    } else if(($('#form\\:confirm_password').val()) !=  ($('#form\\:password').val()) ) {
+      //alert("Error: Please check that you've entered and confirmed your password!");
+      //form.pwd1.focus();
+      return false;
+    }
+
+    //alert("You entered a valid password: " + form.pwd1.value);
+    return true;
+  }
+//]]>
+</script>
+
+<script type="text/javascript">
+
+
+$(document).ready(function (e) {
+    $('#form\\:password').keyup(
+    		 function () 
+    		 {
+		var test=$('#form\\:password').val();
+    		console.log(  "valeur password= "+ test    );
+    		console.log(  "checkPassword= "+ checkPassword()    );
+		  if(checkPassword()) 
+		  {$('#icone3').html('<b:icon value="check" size="lg" style="color:green;" /><br/>');}
+				
+		  else
+     	 {$('#icone3').html('<b:iconAwesome value="close" size="2x" style="color:red;"/>  Votre mot de passe doit avoir au moin 6 charactere et 1 min et Maj<br/>');}
+		
+			
+		  
+    		 }
+
+)});
+
+
+ </script>
+
+
+<script type="text/javascript" >
+            function handlePointClick(event) {
+
+                if (navigator.geolocation)
+                {
+                    browserSupportFlag = true;
+                    var latlng = event.latLng;
+                    geocoder = new google.maps.Geocoder();
+                    geocoder.geocode({'latLng': latlng}, function(results, status)
+                    {
+                        if (status === google.maps.GeocoderStatus.OK)
+                        {
+onPoint([{name: 'address', value:results[0].formatted_address}, {name: 'lng', value:event.latLng.lng()}, {name: 'lat', value: event.latLng.lat()}]);
+
+                        }
+                    });
+                }
+            }
+        </script>
+
+
+<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+
+
+
+
+</ui:define>
+</ui:composition>

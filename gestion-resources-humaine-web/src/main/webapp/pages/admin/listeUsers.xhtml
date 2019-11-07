@@ -1,0 +1,271 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      template="/pages/template/master.xhtml"
+        xmlns:p="http://primefaces.org/ui">
+      
+<ui:define name="head"> 
+
+	<link rel="stylesheet" type="text/css"
+		href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"></link>
+
+	<script type="text/javascript" charset="utf8"
+		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+</ui:define>
+
+
+<ui:define name="main"> 
+<center>
+	<div class="ui-g ui-fluid">
+		<div class="ui-g-12 ui-md-4">
+			<div class="ui-inputgroup">
+				<p:commandButton value="Recherche:" />
+				<p:inputText placeholder="mot clé" id="mySearchText" />
+			</div>
+		</div>
+
+	</div>
+
+	<div style="width: 80%">
+
+		<div>
+			Personnaliser les colonnes: <a class="toggle-vis" data-column="0" href="#">ID</a> -
+			<a class="toggle-vis" data-column="1" href="#">Role</a> -
+			<a class="toggle-vis" data-column="2" href="#">Email</a> - 
+			<a class="toggle-vis" data-column="3" href="#">Login</a> - 
+			<a class="toggle-vis" data-column="4" href="#">Date enregistrement</a> - 
+			<a class="toggle-vis" data-column="5" href="#">Etat</a> -
+			<a class="toggle-vis" data-column="6" href="#">Action</a>
+		</div>
+
+		<h:form id="usersTableForm">
+			<p:dataTable value="#{userBean.listeUsers}" var="User"
+				id="usersTable" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"
+				tableStyle="table-layout:auto" widgetVar="usersTable" emptyMessage="Pas de resultat pour le filtre choisi">
+
+
+
+				<p:column headerText="ID"  width="10" >
+					<h:outputText value="#{User.id}" />
+				</p:column>
+
+
+
+
+
+				<p:column headerText="Role" filterBy="#{User.class.getSimpleName()}" width="205">
+				            <f:facet name="filter">
+                <p:selectOneButton onchange="PF('usersTable').filter()">
+                    <f:converter converterId="javax.faces.Character" />
+                    <f:selectItem itemLabel="User" itemValue="User" />
+                    <f:selectItem itemLabel="Admin" itemValue="Admin" />
+                </p:selectOneButton>
+            </f:facet>
+				    
+					<h:outputText value="#{User.class.getSimpleName()}" />
+					<p:rowToggler />
+				</p:column>
+				
+				<p:rowExpansion>
+				<p:dataTable value="#{userBean.getListeUser_logsByUserID(User.id)}" var="User_log">
+				
+				<p:column headerText="Adresse IP:">
+                <h:outputText value="#{User_log.ip_address}" />
+ 			</p:column>
+ 			
+ 			<p:column headerText="Date de connexion:">
+                <h:outputText value="#{User_log.login_timestamp}" />
+ 			</p:column>
+ 			
+ 			 <p:column headerText="Date de deconnexion:">
+                <h:outputText value="#{User_log.logout_timestamp}" />
+ 			</p:column>
+ 			
+ 			 <p:column headerText="Id PC:">
+                <h:outputText value="#{User_log.pc_id}" />
+ 			</p:column>
+ 			
+ 			 <p:column headerText="Id session:">
+                <h:outputText value="#{User_log.session_id}" />
+ 			</p:column>
+ 			
+				</p:dataTable>
+        </p:rowExpansion>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+
+				<p:column headerText="Email" width="180">
+					<h:outputText value="#{User.email}" />
+				</p:column>
+
+				<p:column headerText="Login" filterBy="#{User.login}" width="90">
+					<h:outputText value="#{User.login}" />
+				</p:column>
+
+				<p:column headerText="Date enregistrement" width="150" style="text-align: center">
+					<h:outputText value="#{User.registration_date}" />
+				</p:column>
+
+				<p:column headerText="Etat" filterBy="#{User.status}" filterMatchMode="exact" width="100">
+				  <f:facet name="filter">
+                <p:selectOneMenu onchange="PF('usersTable').filter()" >
+                    <f:selectItem itemLabel="Tout" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItems value="#{userData.status}" />
+                </p:selectOneMenu>
+            </f:facet>
+					<h:outputText value="#{User.status}" />
+				</p:column>
+
+				<p:column headerText="Action" width="80">
+				<p:commandButton icon="fa fa-fw fa-edit" style="color:green;"  actionListener="#{userBean.removeUser(User.id)}" ajax="false" />
+				<p:commandButton  icon="fa fa-fw fa-trash" style="color:red;" type="submit" actionListener="#{userBean.removeUser(User.id)}" ajax="false"/>
+				<h:commandLink action="#{userBean.createUserLogPDF(User.id)}">
+				<img id="imagePDF" src="http://localhost:18080/gestion-resources-humaine-web/resources/pdf.png" height="30" width="30"  />
+				</h:commandLink>
+	
+				</p:column>
+
+
+
+			</p:dataTable>
+		
+
+		</h:form>
+		
+			<p:growl id="msj"  widgetVar="wmsg"  showDetail="true"  />
+		    <p:socket onMessage="handleMessage" channel="/notify" >
+				<p:ajax event="message"  update=":usersTableForm:usersTable"   />
+			</p:socket>
+
+    <script type="text/javascript">
+        function handleMessage(facemessage) {
+        facemessage.severity='info';
+        PF('wmsg').show([facemessage])
+        }
+    </script>
+		
+		
+	</div>
+
+
+
+	<script type="text/javascript">
+       	//<![CDATA[ 
+
+$(document).ready( function () {
+
+
+	var table =$('#usersTableForm\\:usersTable').find("table").DataTable(
+			{
+		        "scrollY":        "400px",
+		        "scrollCollapse": true,
+		        "paging":         false,
+		        "order": [[ 3, "desc" ]],
+		        "language": {
+		            "search": "Rchercher:"
+		          },
+		        "dom": '<"top"i>rt<"bottom"><"clear">',  //enleve le texte au dessus du tableau
+		        
+		    }
+			);
+
+
+
+
+	
+
+//input recherche pour chaque colonne
+
+// $('#usersTableForm\\:usersTable_foot tr td').each( function () {
+//         var title = $(this).text();
+//         $(this).html( '<input type="text" placeholder="Recherche par '+title+'" />' );
+//     } );
+
+// var table = $('#usersTableForm\\:usersTable').find("table").DataTable();
+
+// // Apply the search
+// table.columns().every( function () {
+//     var that = this;
+
+//     $( 'input', this.footer() ).on( 'keyup change', function () {
+//         if ( that.search() !== this.value ) {
+//             that
+//                 .search( this.value )
+//                 .draw();
+//         }
+//     } );
+// } );
+	
+
+
+//pour le formulaire dans le tableau
+
+// $('button').click( function() {
+//         var data = table.$('input, select').serialize();
+//         alert(
+//             "The following data would have been submitted to the server: \n\n"+
+//             data.substr( 0, 120 )+'...'
+//         );
+//         return false;
+//     } );
+
+
+
+
+
+
+	
+//filtrage colonne
+
+	 $('a.toggle-vis').on( 'click', function (e) {
+	        e.preventDefault();
+	 
+	        // Get the column API object
+	        var column = table.column( $(this).attr('data-column') );
+	 
+	        // Toggle the visibility
+	        column.visible( ! column.visible() );
+	    } );
+
+
+
+//changement zone recherche de text	
+
+
+$(document).ready(function (e) {
+    $('#mySearchText').keyup(
+    		 function () 
+    		 {
+		
+    			  table.search($('#mySearchText').val()).draw();
+//     			  table.columns.adjust().draw();
+		  
+    		 }
+
+)});
+
+} );
+
+
+
+//]]>
+</script>
+
+
+
+</center>
+
+</ui:define>
+</ui:composition>

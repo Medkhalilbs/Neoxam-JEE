@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+
+<body>
+	<div>
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputText value="Objet"></h:outputText>
+				<h:inputText value="#{reclamations.objet}"></h:inputText>
+				<h:outputText value="Description"></h:outputText>
+				<h:inputText value="#{reclamations.description}"></h:inputText>
+
+				<h:outputText value="Categorie" />
+				<h:selectOneMenu value="#{reclamations.categorie}">
+					<f:selectItem itemLabel="Selectionnez une categorie" itemValue="" />
+					<f:selectItems value="#{data.categR}" />
+
+				</h:selectOneMenu>
+
+
+				<h:commandButton action="#{Reclamations.Ajouter}" value="Add"></h:commandButton>
+			</h:panelGrid>
+		</h:form>
+	</div>
+
+
+
+</body>
+</html>

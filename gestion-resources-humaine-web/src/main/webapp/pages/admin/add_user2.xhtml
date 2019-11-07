@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"> 
+
+<h:head>
+<style>
+.fa {
+ color: orange;
+  width: 16px;
+  height: 16px;
+}
+ </style>
+</h:head> 
+<body> 
+
+
+<!-- <div class="ui-g ui-fluid"> -->
+<!--     <div class="ui-g-12 ui-md-4"> -->
+<!--         <div class="ui-inputgroup"> -->
+<!--             <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span> -->
+<!--             <p:inputText placeholder="aaa@bb.cc" />       -->
+<!--         </div> -->
+<!--     </div> -->
+<!--  </div> -->
+<!--  <div class="ui-g ui-fluid"> -->
+<!--     <div class="ui-g-12 ui-md-4"> -->
+<!--         <div class="ui-inputgroup"> -->
+<!--             <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span> -->
+<!--             <p:inputText placeholder="Username" />       -->
+<!--         </div> -->
+<!--     </div> -->
+<!--  </div> -->
+ 
+
+	<h:form id="form">
+		<h:panelGrid columns="3">
+
+		<h:outputText value="*Email address"/>
+		<p:inputText type="email"  placeholder="aaa@bb.cc" value="#{userBean.email}"  id="email" >
+		<f:validator binding="#{registerEmailValidator}" />
+		<p:ajax event="keyup" update="emailMessage" />
+		</p:inputText>
+		<h:column>
+			<div style="display: inline-block" id="icone1">
+		<h:message  id="emailMessage" for="email" style="color:red" />
+		
+<!-- 			<b:iconAwesome value="close" size="2x" style="color:red;"/>  Veillez saisir une addresse mail<br/> -->
+		    </div>	
+		</h:column>
+		
+		<h:outputText value="*Login" />
+		<p:inputText type="text"  value="#{userBean.login}" id="login" validator="#{registerLoginValidator.validate}">	</p:inputText>
+		<h:column>
+			<div style="display: inline-block" id="icone2">
+<!-- 			<b:iconAwesome value="close" size="2x" style="color:red;"/>  Veillez saisir un login<br/> -->
+		    </div>	
+		</h:column>
+		
+		<h:outputText value="*Password" />
+		<h:inputText value="#{userBean.password}" id="password"/>
+		<h:column>
+			<div style="display: inline-block" id="icone3">
+<!-- 			<b:iconAwesome value="close" size="2x" style="color:red;"/>  Veillez saisir un mot de passe<br/> -->
+		    </div>	
+		</h:column>
+		
+		<h:outputText value="*Confirm Password" />
+		<h:inputText value="#{userBean.confirm_password}" id="confirm_password"/>
+		<h:column>
+			<div style="display: inline-block" id="icone4">
+<!-- 			<b:iconAwesome value="close" size="2x" style="color:red;"/>  Veillez confirmer votre mot de passe<br/> -->
+		    </div>	
+		</h:column>
+		   
+		   <h:column>
+		   <div style="display: inline-block" id="buttonRegister">
+		<h:commandButton id="btn" action="#{userBean.UserRegister()}" onclick="return checkPassword(); " value="Register"  />
+		</div>
+		</h:column>
+		
+		<p:remoteCommand name="callRemoteMethod" actionListener="#{userBean.checkIfEmailAndLoginConstraint()}" oncomplete="getLayoutAreSelectedResult(xhr, status, args);" />
+
+		<h:message for="btn"/>
+		</h:panelGrid>
+	</h:form>
+			<!--  <h:inputText value="#{userBean.email}" onkeyup="return filtreNombre(event) "/> -->	
+	
+	
+
+	
+	     <script>
+         var loader = "/gestion-resources-humaine-web/loupe.gif"; //link to the animated loader-small.gif
+     </script>
+
+
+<!-- <h:outputScript library="js" name="jquery.min.js" target="head"/> -->
+<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+
+
+
+<!--  		<script>  
+//Ne marche plus a cause du mail et login validator , il ecrase le flux entrant json		
+		var x=0;
+		 var returnedValue;
+		 $(document).ready(function (e) {
+         $('#form\\:email').keyup(
+             function () 
+             { 	 $('#icone1').html('<img src="' + window.loader + '" height="28" width="28"/>'); 
+                 callRemoteMethod();
+                
+
+
+            	 window.getLayoutAreSelectedResult= function(xhr, status, args) {
+            	       returnedValue = args.returnedValue;
+            	       console.log("returnedValue 1= "+returnedValue);
+
+
+                         x=x+1;
+                         console.log(x );
+                         console.log("this is %o, event is %o, host is %s", this, e, location.host);
+                         console.log("%s", new Error().stack);
+                         
+                         if (returnedValue=='1')
+                       	 {
+                        	 $('#icone1').html('<b:iconAwesome value="close" size="2x" style="color:red;"/>  Cette Address mail existe deja<br/>');  	 
+                       	 //alert("email exist car "+x);
+                       	 }
+                         else if (returnedValue=='3')
+                       	 {
+                        	 $('#icone1').html('<b:iconAwesome value="close" size="2x" style="color:red;"/>  Cette Address mail est invalide<br/>');  	 
+                       	 //alert("email exist car "+x);
+                       	 }
+                         else if ($('#form\\:email').val()=='')
+                        	 {$('#icone1').html('<b:iconAwesome value="close" size="2x" style="color:red;"/>  Veillez saisir une addresse mail<br/>');}
+                        else   
+                        	 {$('#icone1').html('<b:icon value="check" size="lg" style="color:green;" /><br/>');}
+            	    }
+
+
+         
+
+             });
+		 });
+			
+     </script>
+
+  -->
+  
+    
+  
+       		<script type="text/javascript">
+//<![CDATA[ 
+       		
+		var x=0;
+		 var returnedValue;
+		 $(document).ready(function (e) {
+         $('#form\\:login').keyup(
+             function () 
+             { 	 $('#icone2').html('<img src="' + window.loader + '" height="28" width="28"/>'); 
+                 callRemoteMethod();
+                
+
+
+            	 window.getLayoutAreSelectedResult= function(xhr, status, args) 
+            	 {
+            	       returnedValue = args.returnedValue;
+            	       console.log("returnedValue 1= "+returnedValue);
+                       x=x+1;
+                       console.log(x );
+                       console.log("this is %o, event is %o, host is %s", this, e, location.host);
+                       console.log("%s", new Error().stack);
+                       console.log("returnedValue 2= "+returnedValue);
+                         
+                         if (returnedValue=='2')
+                       	 {
+                        	 $('#icone2').html('<i id="oo" class="fa fa-close fa-2x" style="color:red;"></i>  Ce login existe deja');  	 
+                       	 //alert("email exist car "+x);
+                       	 }
+                         else if (($('#form\\:login').val().length) < 4)
+                    	 {$('#icone2').html('<i id="kk" class="fa fa-close fa-2x" style="color:red;"><font size="-1"></i> Veillez saisir login de minimum 4 charcatere</font>');}
+                         else   
+                    	 {$('#icone2').html('<i id="ll" class="glyphicon glyphicon-check fa-lg" style="color:green;"></i>');}
+            	 }
+         
+             }
+            );
+		 });
+			
+		//]]>
+		 </script>
+
+
+<script type="text/javascript">
+$(document).ready(function (e) {
+    $('#form\\:confirm_password').keyup(
+    		 function () 
+    		 {
+		var test=$('#form\\:confirm_password').val();
+    		console.log(  "valeur password= "+ test    );
+		
+		  if(($('#form\\:confirm_password').val()) !=  ($('#form\\:password').val()) ) 
+			{$('#icone4').html('<i id="jj" class="fa fa-close fa-2x" style="color:red;"></i>  Veillez verifier votre mot de passe'); }
+		  else if ($('#form\\:confirm_password').val()=='')
+     	 {$('#icone1').html('<b:iconAwesome value="close" size="2x" style="color:red;"/>  Veillez confirmer votre mot de passe<br/>');}
+		  else 
+			{$('#icone4').html('<i id="aa" class="glyphicon glyphicon-check fa-lg" style="color:green;"></i>');}
+		  
+    		 }
+
+)});
+
+
+ </script>
+ 
+ 
+ <script type="text/javascript">
+//<![CDATA[ 
+  function checkPassword()
+  {console.log(  "checkPassword executed "    );
+	   var password=($('#form\\:password').val());
+    if(password == "") {
+      //alert("Error: Username cannot be blank!");
+      //form.username.focus();
+      return false;
+    }
+
+
+    if(password != "" ) {
+      if(password.length < 6) {
+        //alert("Error: Password must contain at least six characters!");
+        //form.pwd1.focus();
+        return false;
+      }
+
+      re = /[0-9]/;
+      if(!re.test(password)) {
+        //alert("Error: password must contain at least one number (0-9)!");
+        //form.pwd1.focus();
+        return false;
+      }
+      re = /[a-z]/;
+      if(!re.test(password)) {
+       // alert("Error: password must contain at least one lowercase letter (a-z)!");
+       // form.pwd1.focus();
+        return false;
+      }
+      re = /[A-Z]/;
+      if(!re.test(password)) {
+       // alert("Error: password must contain at least one uppercase letter (A-Z)!");
+        //form.pwd1.focus();
+        return false;
+      }
+    } else if(($('#form\\:confirm_password').val()) !=  ($('#form\\:password').val()) ) {
+      //alert("Error: Please check that you've entered and confirmed your password!");
+      //form.pwd1.focus();
+      return false;
+    }
+
+    //alert("You entered a valid password: " + form.pwd1.value);
+    return true;
+  }
+//]]>
+</script>
+
+<script type="text/javascript">
+
+
+$(document).ready(function (e) {
+    $('#form\\:password').keyup(
+    		 function () 
+    		 {
+		var test=$('#form\\:password').val();
+    		console.log(  "valeur password= "+ test    );
+    		console.log(  "checkPassword= "+ checkPassword()    );
+		  if(checkPassword()) 
+		  {$('#icone3').html('<b:icon value="check" size="lg" style="color:green;" /><br/>');}
+				
+		  else
+     	 {$('#icone3').html('<b:iconAwesome value="close" size="2x" style="color:red;"/>  Votre mot de passe doit avoir au moin 6 charactere et 1 min et Maj<br/>');}
+		
+			
+		  
+    		 }
+
+)});
+
+
+ </script>
+
+
+
+
+
+</body> 
+
+
+
+</html>

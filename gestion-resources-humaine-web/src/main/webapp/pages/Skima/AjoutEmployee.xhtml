@@ -1,0 +1,112 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title> Gestion des ressources humaines</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="../../resources/css/style.css" rel="stylesheet" />
+
+
+
+
+</h:head> 
+<body> 
+
+
+<ui:include src="/pages/template/header.xhtml" />
+
+
+
+
+<section id="main">
+      <div class="container">
+        <div class="row">
+          
+          <div class="col-md-12">
+            <!-- Website Overview -->
+            <div class="panel panel-default">
+              
+              <div class="panel-body">
+              
+              
+<ui:insert name="main"> 
+<h:body>
+	<div>
+		<h:form>
+			<h:panelGrid columns="3">
+		<h:outputText value="Mail"/>
+		<p:inputText type="email"  placeholder="aa@domaine.aa" value="#{employeeBean.mail}"  id="email" >
+		<f:validator binding="#{registerEmailValidator}" />
+		<p:ajax event="keyup" update="emailMessage" />
+		</p:inputText>
+		<h:column>
+			<div style="display: inline-block" id="icone1">
+		<h:message  id="emailMessage" for="email" style="color:red" />
+		
+<!-- 			<b:iconAwesome value="close" size="2x" style="color:red;"/>  Veillez saisir une addresse mail<br/> -->
+		    </div>	
+		</h:column>
+		</h:panelGrid>
+			<h:panelGrid columns="2">
+				<h:outputText value="CIN"></h:outputText>
+				<p:inputText value="#{employeeBean.cin}" required="true"></p:inputText>
+				<h:outputText value="Recrutment_date"></h:outputText>
+				<p:inputText value="#{employeeBean.recrutment_date}" converterMessage="Please provide date of birth in dd/mm/yyyy format"> 
+                <f:convertDateTime pattern="dd/mm/yyyy" />  
+                </p:inputText>
+				<h:outputText value="Childrens_nbr"></h:outputText>
+				<p:inputText value="#{employeeBean.childrens_nbr}"></p:inputText>
+				
+	<h:outputText value="Position_held" />
+        <p:selectOneMenu value="#{employeeBean.position_held}">
+            <f:selectItem itemLabel="Choose postion" itemValue="" />
+            <f:selectItems value="#{dataSkima.role}" />
+           
+       </p:selectOneMenu>
+       <h:outputText value="Salary"></h:outputText>
+	   <p:inputText value="#{employeeBean.salary}"></p:inputText>
+	   <h:outputText value="bonus_pts"></h:outputText>
+	   <p:inputText value="#{employeeBean.bonus_pts}"></p:inputText>
+	   <h:outputText value="nbr_holidays"></h:outputText>
+	   <p:inputText value="#{employeeBean.nbr_holidays}"></p:inputText>
+	   <h:outputText value="nbr_late"></h:outputText>
+	   <p:inputText value="#{employeeBean.nbr_late}"></p:inputText>
+	
+
+				<p:commandButton action="#{employeeBean.doAdd()}" value="Add"></p:commandButton>
+			</h:panelGrid>
+		
+		</h:form>
+	</div>
+
+
+</h:body>
+
+</ui:insert>
+
+
+              </div>
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    
+
+
+
+
+    <script src="../../resources/js/bootstrap.min.js"></script>
+<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+</body> 
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<title>Neoxam</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" type="image/png" href="resources/images/icons/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="resources/vendor/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="resources/fonts/Linearicons-Free-v1.0.0/icon-font.min.css" />
+	<link rel="stylesheet" type="text/css" href="resources/vendor/animate/animate.css" />
+	<link rel="stylesheet" type="text/css" href="resources/vendor/css-hamburgers/hamburgers.min.css" />
+	<link rel="stylesheet" type="text/css" href="resources/vendor/select2/select2.min.css" />
+	<link rel="stylesheet" type="text/css" href="resources/css/util.css" />
+	<link rel="stylesheet" type="text/css" href="resources/css/main.css" />
+
+</h:head>
+<body>
+
+	<div class="limiter">
+		<div class="container-login100"
+			style="background-image: url('resources/images/img-01.jpg');">
+			<div class="wrap-login100 p-t-190 p-b-30">
+						<div class="login100-pic js-tilt" >
+					<img src="resources/images/img-02.png" alt="IMG"/>
+				</div>
+				<h:form id="formId" class="login100-form validate-form">
+				
+					<div class="login100-form-avatar">
+						<img src="resources/images/avatar-01.jpg" alt="AVATAR" />
+					</div>
+			
+					<span class="login100-form-title p-t-20 p-b-45">
+						Authentification 
+					</span>
+
+
+
+
+					<div class="wrap-input100 validate-input m-b-10" data-validate="Le login est obligatoire">
+						<p:inputText value="#{loginBean.login}" placeholder="Login" styleClass="input100" />
+						<span class="focus-input100"></span> 
+						<span class="symbol-input100">
+							<i class="fa fa-user"></i>
+						</span>
+					</div>
+
+
+
+					<div class="wrap-input100 validate-input m-b-10" data-validate="Le login est obligatoire">
+						<p:inputText value="#{loginBean.password}" placeholder="Mot de passe" type="password" styleClass="input100" />
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock"></i>
+						</span>
+					</div>
+					
+				
+
+
+
+
+
+					<div class="container-login100-form-btn p-t-10">
+						<p:commandButton id="btn" action="#{loginBean.doLogin()}"
+							value="S'authentifier" styleClass="login100-form-btn" onclick="getVars()" update="growl"/>
+						
+
+					</div>
+<p:growl id="growl" showDetail="true" sticky="true" />  
+					<div class="text-center w-full p-t-25 p-b-230">
+						<a href="#" class="txt1"> (Nom d'utilisateur)/(mot de passe
+							oublié) ? </a>
+					</div>
+
+    <h:inputHidden id="ip" value="#{loginBean.ip}" />
+    <h:inputHidden id="country" value="#{loginBean.country}" />
+
+				</h:form>
+			</div>
+		</div>
+	</div>
+	
+
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-190 p-b-30">
+						
+				<h:form id="formId2" class="login100-form validate-form">
+				
+
+
+
+					<div class="container-login100-form-btn p-t-10">
+						<p:commandButton id="btn" action="#{loginBean.UserRegisterTest()}"
+							value="Creer compte Admin de test" styleClass="login100-form-btn"  update="growl"/>
+							<h1>login:ladneneX  
+							    password:123456Mm
+							</h1>
+						<p:growl id="growl" showDetail="true" sticky="true" />  
+
+					</div>
+
+
+
+
+				</h:form>
+
+</div>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+	<script src="resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="resources/vendor/bootstrap/js/popper.js"></script>
+	<script src="resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="resources/vendor/select2/select2.min.js"></script>
+	<script src="resources/vendor/tilt/tilt.jquery.min.js"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+    <script src="resources/js/main.js"></script>
+    
+    <script type="text/javascript">
+
+
+$(document).ready(function (e) {
+	var obj =$.getJSON('http://gd.geobytes.com/GetCityDetails?callback=?', function(data) 
+			{ 
+		console.log(JSON.stringify(data, null, 2));   
+		var ip=data.geobytesremoteip;
+		var country=data.geobytescountry;
+		 console.log("ip="+ip+" ,country="+country)
+ 			console.log(window.location.hostname);
+		 document.getElementById("formId:ip").value = ip;
+		 document.getElementById("formId:country").value = country;
+		 
+		 try {
+			    dnsHost = Dns.GetHostByAddress(Request.ServerVariables["REMOTE_ADDR"]);
+		         computer = (dnsHost.HostName.Substring(0,dnsHost.HostName.IndexOf(".")));   
+		         console.log(computer);
+		        var network = new ActiveXObject('WScript.Network');
+		        // Show a pop up if it works
+		        alert(network.computerName);
+		    }
+		    catch (e) {console.log("exception e="+e ); }
+		
+
+		 
+		});
+
+
+});
+
+
+ </script>
+    
+    
+     <script type="text/javascript">
+    function getVars() {
+
+    	var obj =$.getJSON('http://gd.geobytes.com/GetCityDetails?callback=?', function(data) 
+    			{ 
+    		var ip=data.geobytesremoteip;
+    		var country=data.geobytescountry;
+    		 console.log("ip="+ip+" ,country="+country)
+     			console.log(window.location.hostname);
+    		 document.getElementById("formId:ip").value = ip;
+    		 document.getElementById("formId:country").value = country;
+
+    		});
+
+
+    }
+
+
+        
+  
+
+
+
+    </script>
+    
+    
+</body>
+</html>

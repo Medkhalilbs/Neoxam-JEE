@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>gestion-resources-humaine-web</display-name>
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.jsf</url-pattern>
+  </servlet-mapping>
+  <context-param>
+    <param-name>primefaces.FONT_AWESOME</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <context-param>
+    <param-name>net.bootsfaces.get_fontawesome_from_cdn</param-name>
+    <param-value>false</param-value>
+  </context-param>
+  <context-param>
+    <param-name>tempfile.dir</param-name>
+    <param-value>tmpfiles</param-value>
+  </context-param>
+  <servlet>
+    <description></description>
+    <display-name>FileUploader</display-name>
+    <servlet-name>FileUploader</servlet-name>
+    <servlet-class>resources.FileUploader</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FileUploader</servlet-name>
+    <url-pattern>/FileUploader</url-pattern>
+  </servlet-mapping>
+</web-app>

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://java.sun.com/jsf/html"> 
+
+<h:head>
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title> Gestion des projets</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="resources/css/style.css" rel="stylesheet" />
+
+
+</h:head> 
+<body> 
+<ui:include src="/pages/template/header.xhtml" />
+
+<section id="main">
+      <div class="container">
+        <div class="row">
+          
+          <div class="col-md-6">
+          
+          <div class="alert alert-info">
+          
+          	Formulaire Ajoute Projet
+          
+          </div>
+            <!-- Website Overview -->
+            <div class="panel panel-default">
+              
+              <div class="panel-body">
+              
+              
+<ui:insert name="main"> 
+<h:form class="form-horizantal">
+
+<div class="form-group">
+<h:outputText value="nom projet"></h:outputText>
+<h:inputText value="#{projetBean.nom}" class="form-control" />
+</div>
+
+<div class="form-group">
+<h:outputText value="status du projet"></h:outputText>
+<h:selectOneMenu value="#{projetBean.status}" class="form-control">
+<f:selectItem itemValue="encours" itemLabel="en cours "/>
+<f:selectItem itemValue="termine" itemLabel="termine "/>
+</h:selectOneMenu>
+</div>
+<div class="form-group">
+<h:commandButton action="#{projetBean.ajouterprojet()}" value="ajouter projet" class="btn btn-success" />
+</div>
+
+
+
+
+
+</h:form>
+
+
+
+</ui:insert>
+
+
+              </div>
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+     <script src="resources/js/bootstrap.min.js"></script>
+
+</body> 
+</html>
